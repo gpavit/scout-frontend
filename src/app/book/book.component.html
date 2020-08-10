@@ -1,0 +1,159 @@
+{{errorMessage}}
+<div class="container-fluid ml-2 p-5" id="bookcomponent">
+  <form novalidate #myForm="ngForm" (ngSubmit)="onSubmit()" [formGroup]="demoForm">
+    <div class="form-group">
+      <p>Online Collection: Oxford Scholarship Online</p>
+    </div>
+    <div class="from-group form-inline">
+      <label for="form_subject">Online Collection Subject: </label>
+      <input type="text" class="form-control small mx-sm-3" style="width: 30%;" formControlName="subject" />
+      <br />
+    </div>
+    <div class="container-fluid mt-2 ml-1 p-3 border w-77 h-30">
+      <div>
+        <p>Contributor 1</p>
+      </div>
+      <div></div>
+      <div class="row small">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="form_title">Title:</label>
+          </div>
+          <div class="form-group">
+            <label for="form_name">Given Name: Cathy</label>
+          </div>
+          <div class="form-group">
+            <label for="form_surname">Surname*: Dolbear</label>
+          </div>
+          <div class="form-group">
+            <label for="form_suffix">Suffix:</label>
+          </div>
+          <div class="form-group">
+            <label for="form_degree">Degree:</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="form_type">Type*:</label>
+          </div>
+          <div class="form-group">
+            <label for="form_role">Role*: Please add a valid Role in STAR</label>
+          </div>
+          <div class="form-group">
+            <label for="form_orcid">ORCID</label>
+            <input id="form_orcid" type="text" name="orcid" class="form-control small"
+              placeholder="Enter Contributor ORCID e.g. 1234-4321-5643-5632" style="font-size: 13px !important;"
+              readonly />
+          </div>
+          <div class="form-group">
+            <label for="form_website">Website</label>
+            <input id="form_website" type="text" name="website" class="form-control small"
+              placeholder="Enter Contributor Website" style="font-size: 13px !important;" readonly />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="form_starjob">STAR Job Title/s: Dean and Associate Professor of Political Philosophy and
+              Continental Theology of the John Paull
+              II Institute, Melbourne and Member of the Centre of Theology and Philosophy</label>
+          </div>
+          <div class="form-group">
+            <label for="form_starname">STAR Affiliation/s Name & Address: Dean and Associate Professor of Political
+              Philosophy and Continental Theology
+              of the John Paull II Institute, Melbourne and Member of the Centre of Theology and Philosophy at the
+              University
+              of Nottingham</label>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row small">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="form_jobtitle">Job Title</label>
+            <input id="form_jobtitle" type="text" name="jobtitle" class="form-control small"
+              placeholder="Dean and Associate Professor of Political Philosophy and Continental Theology"
+              style="font-size: 13px !important;" readonly />
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="form_affname">Affiliation Name</label>
+            <input id="form_affname" type="text" name="affname" class="form-control small"
+              placeholder="John Paul II Institute" style="font-size: 13px !important;" readonly />
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="form_name">Affiliation Address</label>
+            <input id="form_affadd" type="text" name="affadd" class="form-control small"
+              placeholder="John Paul II Institute, Melbourne" style="font-size: 13px !important;" readonly />
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="form_country">Country</label>
+            <input id="form_country" type="text" name="country" class="form-control small country_border" matInput
+              [matAutocomplete]="auto" formControlName="country" required />
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptions | async"
+                [value]="option.name ? option.name : (option.iso_code || option.synonym)">
+                {{option.name ? option.name : (option.iso_code || option.synonym)}}
+              </mat-option>
+            </mat-autocomplete>
+            <div class="error" *ngIf="demoForm.get('country').hasError('required') && demoForm.get('country').touched">
+              Country is required</div>
+            <div class="error" *ngIf="demoForm.get('country').hasError('min') && demoForm.get('country').touched">
+              Minimum of two characters
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="container-fluid form-horizontal mt-2 ml-1 mb-1 p-3 border w-50 h-25">
+      <div class="form-group row small">
+        <label for="form_copy" class="control-label col-sm-4 col-form-label">Copyright Holder *</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control small" id="copy" placeholder="Oxford University Press" name="copy"
+            readonly />
+        </div>
+      </div>
+      <div class="form-group row small">
+        <label for="form_copyyear" class="control-label col-sm-4 col-form-label">Copyright Year *</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control small" style="width: 30%;" id="copyyear" name="copyyear"
+            formControlName="copyRightYear" (keypress)="allowOnlyNumber(e)" maxlength="4" required />
+          <div class="error"
+            *ngIf="demoForm.get('copyRightYear').hasError('required') && demoForm.get('copyRightYear').touched">Copy
+            Right Year is required</div>
+          <div class="error"
+            *ngIf="(demoForm.get('copyRightYear').hasError('pattern') || demoForm.get('copyRightYear').hasError('min') || demoForm.get('copyRightYear').hasError('max')) && demoForm.get('copyRightYear').touched">
+            Please enter a 4 digit year between 1700 and 2100
+          </div>
+        </div>
+      </div>
+      <div class="form-group row small">
+        <label for="form_copystat" class="control-label col-sm-4 col-form-label">Copyright Statement *</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control small" id="copystat" placeholder="Oxford University Press 201818"
+            name="copystat" readonly />
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row small ml-1 mb-1">
+      <label for="form_doi" class="control-label col-sm-2 col-form-label">DOI*:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control small" name="doi" formControlName="doi" />
+      </div>
+    </div>
+
+    <br />
+    <button type="submit" mat-flat-button color="primary">Submit</button>
+  </form>
+  {{successMessage}}
+</div>

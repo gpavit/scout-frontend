@@ -46,6 +46,9 @@ import localePl from '@angular/common/locales/pl';
 import localeFi from '@angular/common/locales/fi';
 import localeDa from '@angular/common/locales/da';
 import localeSv from '@angular/common/locales/sv';
+import { SearchComponent } from './search/search.component';
+import { BookComponent } from './book/book.component';
+import { DataService } from './services/data.service';
 
 registerLocaleData(localeFr);
 registerLocaleData(localeDe);
@@ -92,10 +95,13 @@ registerLocaleData(localeSv);
         StartProcessComponent,
         AppLayoutComponent,
         BlobViewComponent,
-        FileViewComponent
+        FileViewComponent,
+        SearchComponent,
+        BookComponent
     ],
     providers: [
         PreviewService,
+        DataService,
         {
             provide: TRANSLATION_PROVIDER,
             multi: true,

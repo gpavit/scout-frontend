@@ -1,0 +1,70 @@
+div {
+    font-size: 9px;
+}
+
+input {
+    font-size: 9px;
+}
+
+::-webkit-input-placeholder {
+  font-size: 7px !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  font-size: 7px !important;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  font-size: 7px !important;
+}
+
+#test ::ng-deep .mat-form-field-appearance-outline {
+  width: 140px;
+  height: 10px;
+  line-height: 1;
+}
+
+#test ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+  padding: 0px 10px 0px 10px;
+}
+
+#test ::ng-deep .mat-form-field-infix {
+  padding: 2px 0 2px 0;
+}
+
+#test ::ng-deep .mat-form-field-hide-placeholder .mat-form-field-label-wrapper {
+  text-align: left;
+  top: -25px;
+}
+
+#test ::ng-deep .mat-form-field-should-float {
+  text-align: left;
+}
+
+#test ::ng-deep .mat-input-element {
+  border-color: #495057;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#test ::ng-deep .mat-form-field-appearance-outline {
+  border-color: #495057;
+//  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  background-color: #fff;
+//  background-clip: padding-box;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  display: block;
+
+}
+
+.error {
+  color: red;
+}
+
+.country_border {
+  background-color: #e9ecef;
+    opacity: 1;
+}
+
+
