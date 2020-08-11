@@ -95,7 +95,7 @@
             <label for="form_country">Country</label>
             <input id="form_country" type="text" name="country" class="form-control small country_border" matInput
               [matAutocomplete]="auto" formControlName="country" required />
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async"
                 [value]="option.name ? option.name : (option.iso_code || option.synonym)">
                 {{option.name ? option.name : (option.iso_code || option.synonym)}}
@@ -126,7 +126,8 @@
         <label for="form_copyyear" class="control-label col-sm-4 col-form-label">Copyright Year *</label>
         <div class="col-sm-6">
           <input type="text" class="form-control small" style="width: 30%;" id="copyyear" name="copyyear"
-            formControlName="copyRightYear" (keypress)="allowOnlyNumber(e)" maxlength="4" required />
+            formControlName="copyRightYear" (keypress)="allowOnlyNumber($event)" maxlength="4" 
+            required />
           <div class="error"
             *ngIf="demoForm.get('copyRightYear').hasError('required') && demoForm.get('copyRightYear').touched">Copy
             Right Year is required</div>

@@ -46,19 +46,19 @@ export class BookComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.docId$.subscribe((data) => {  
+    this.dataService.docId$.subscribe((data) => {
       this.docId = data
       console.log("DocId", this.docId);
     });
-    this.dataService.subject$.subscribe((data) => {  
+    this.dataService.subject$.subscribe((data) => {
       this.subject = data
       console.log("Subject", this.subject);
     });
-    this.dataService.doi$.subscribe((data) => {  
+    this.dataService.doi$.subscribe((data) => {
       this.doi = data
       console.log("Doi", this.doi);
     });
-    setTimeout( () => {
+    setTimeout(() => {
       this.getAppName();
     }, 100);
     this.getCountry();
@@ -99,7 +99,7 @@ export class BookComponent implements OnInit {
   searchProcess(appId) {
     this.processService.getProcessDefinitions(appId)
       .subscribe((processDefinitionRepresentation: ProcessDefinitionRepresentation[]) => {
-        processDefinitionRepresentation.forEach(res => {  
+        processDefinitionRepresentation.forEach(res => {
           if (this.saveRecordProcessKey === res.key) {
             this.saveProcessDefinationId = res.id;
           } else {
@@ -127,8 +127,8 @@ export class BookComponent implements OnInit {
     if (this.demoForm.invalid) {
       return true;
     }
-    for(var i = 0; i < this.countryData.length; i++) {
-      if(this.f.country.value === this.countryData[i].name) {
+    for (var i = 0; i < this.countryData.length; i++) {
+      if (this.f.country.value === this.countryData[i].name) {
         this.code = this.demoForm.controls['countryCode'].setValue(this.countryData[i].iso_code)
       }
     }
