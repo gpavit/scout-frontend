@@ -82,6 +82,7 @@ export class SearchComponent implements OnInit {
   }
 
   onSearch() {
+    this.errMsg = "";
     const name = 'Search Record ' + (moment(new Date()).format('DD-MM-YYYY HH:mm'));
     const startFormValues = {
       isbn: this.f.isbn.value ? this.f.isbn.value : null,

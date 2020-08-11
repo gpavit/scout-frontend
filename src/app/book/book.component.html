@@ -1,4 +1,4 @@
-{{errorMessage}}
+<!--{{errorMessage}}-->
 <div class="container-fluid ml-2 p-5" id="bookcomponent">
   <form novalidate #myForm="ngForm" (ngSubmit)="onSubmit()" [formGroup]="demoForm">
     <div class="form-group">
@@ -148,7 +148,7 @@
     <div class="form-group row small ml-1 mb-1">
       <label for="form_doi" class="control-label col-sm-2 col-form-label">DOI*:</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control small" name="doi" formControlName="doi" />
+        <input type="text" class="form-control small" name="doi" formControlName="doi" readonly />
       </div>
     </div>
 
