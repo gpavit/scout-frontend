@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>APS ADF Application</title>
@@ -10,9 +11,12 @@
   <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
   <style>
-    body, html {
+    body,
+    html {
       height: 100%;
     }
 
@@ -57,7 +61,7 @@
     }
 
     .path {
-      stroke-dasharray: 1,200;
+      stroke-dasharray: 1, 200;
       stroke-dashoffset: 0;
       stroke: #B6463A;
       animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
@@ -72,23 +76,25 @@
 
     @keyframes dash {
       0% {
-        stroke-dasharray: 1,200;
+        stroke-dasharray: 1, 200;
         stroke-dashoffset: 0;
       }
 
       50% {
-        stroke-dasharray: 89,200;
+        stroke-dasharray: 89, 200;
         stroke-dashoffset: -35;
       }
 
       100% {
-        stroke-dasharray: 89,200;
+        stroke-dasharray: 89, 200;
         stroke-dashoffset: -124;
       }
     }
 
     @keyframes color {
-      100%, 0% {
+
+      100%,
+      0% {
         stroke: #d62d20;
       }
 
@@ -100,13 +106,15 @@
         stroke: #008744;
       }
 
-      80%, 90% {
+      80%,
+      90% {
         stroke: #ffa700;
       }
     }
   </style>
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 </head>
+
 <body class="adf-background-color">
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -116,6 +124,7 @@
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
   <app-root>
     <div id="loader-container" class="loader-container">
       <div class="loader-spinner">
@@ -129,6 +138,5 @@
     </div>
   </app-root>
 </body>
+
 </html>
-
-

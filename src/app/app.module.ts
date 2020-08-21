@@ -49,6 +49,11 @@ import localeSv from '@angular/common/locales/sv';
 import { SearchComponent } from './search/search.component';
 import { BookComponent } from './book/book.component';
 import { DataService } from './services/data.service';
+import { AuthorizationService } from './services/authorization.service';
+import { MenuComponent } from './menu/menu.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './auth/token.interceptor';
+
 
 registerLocaleData(localeFr);
 registerLocaleData(localeDe);
@@ -97,11 +102,18 @@ registerLocaleData(localeSv);
         BlobViewComponent,
         FileViewComponent,
         SearchComponent,
-        BookComponent
+        BookComponent,
+        MenuComponent
     ],
     providers: [
         PreviewService,
         DataService,
+        AuthorizationService,
+/*        {
+            provide: HTTP_INTERCEPTORS, 
+            useClass: TokenInterceptor, 
+            multi: true
+        },*/
         {
             provide: TRANSLATION_PROVIDER,
             multi: true,

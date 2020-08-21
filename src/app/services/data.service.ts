@@ -8,11 +8,13 @@ export class DataService {
     private docId = new BehaviorSubject<string>("");
     private subject = new BehaviorSubject<string>("");
     private doi = new BehaviorSubject<string>("");
+    private token = new BehaviorSubject<string>("");
 
     //Observable string streams
     docId$ = this.docId.asObservable();
     subject$ = this.subject.asObservable();
     doi$ = this.doi.asObservable();
+    token$ = this.token.asObservable();
 
     //Service message commands
     getDocId(docData: string) {
@@ -25,6 +27,10 @@ export class DataService {
 
     getDoi(doiData: string) {
         this.doi.next(doiData);
+    }
+
+    getToken(tokData: string) {
+        this.token.next(tokData);
     }
 
 }

@@ -1,24 +1,32 @@
-
-<div class="container h-100">
+<app-menu></app-menu>
+<div class="container h-50" id="search">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-10 col-md-8 col-lg-6">
       <form class="form-example" novalidate [formGroup]="searchForm">
-        <h1>Search by ISBN/Work Id</h1>
+        <h1>Home</h1>
         <p class="description"></p>
-        <div class="form-group">
-          <label for="isbn">ISBN:</label>
-          <input type="text" class="form-control" id="isbn" name="isbn" formControlName="isbn">
+        <div class="input-group">
+          <input type="text" class="form-control" id="isbn" name="isbn" formControlName="isbn"
+            placeholder="Enter an ISBN">
+          <div class="input-group-append">
+            <button class="btn" type="button" (click)="onSearch()">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
         </div>
-        <p style="text-align: center;">Or</p>
-        <div class="form-group">
-          <label for="workid">WORK ID:</label>
-          <input type="text" class="form-control" id="workid" name="workid" formControlName="workId">
-        </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary btn-customized" (click)="onSearch()">Search</button>
+        <br />
+        <p>OR</p>
+        <br />
+        <div class="input-group">
+          <input type="text" class="form-control" id="workid" name="workid" formControlName="workId"
+            placeholder="Enter a Work ID">
+          <button class="btn" type="button" (click)="onSearch()">
+            <i class="fa fa-search"></i>
+          </button>
         </div>
       </form>
-      {{errMsg}}
+      <br />
+      <div class="error small" *ngIf="errMsg"><span><i class="fa fa-exclamation-circle"></i></span>{{errMsg}}</div>
     </div>
   </div>
 </div>

@@ -1,0 +1,54 @@
+#menu {
+  color: navy;
+}
+
+.navbar-toggler {
+  cursor: pointer;
+}
+#collapsingNavbar {
+  position: fixed;
+  top: 1.5cm;
+  right: 0.5cm;
+  width: 11%;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  color: #212529;
+}
+
+#person {
+  margin-left: 95%;
+  font-size: 1.5rem;
+}
+
+#hamburger {
+  font-size: 1.5rem;
+}
+
+#drop {
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+.inactiveLink {
+  pointer-events: none;
+  cursor: default;
+}
+
+#image {
+  vertical-align: text-top;
+  width: 20%;
+}
+

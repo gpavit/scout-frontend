@@ -1,3 +1,4 @@
+<app-menu></app-menu>
 <!--{{errorMessage}}-->
 <div class="container-fluid ml-2 p-5" id="bookcomponent">
   <form novalidate #myForm="ngForm" (ngSubmit)="onSubmit()" [formGroup]="demoForm">
@@ -154,7 +155,7 @@
     </div>
 
     <br />
-    <button type="submit" mat-flat-button color="primary">Submit</button>
+    <button type="submit" class="btn" id="button-color">Submit</button>
   </form>
   {{successMessage}}
 </div>

@@ -29,26 +29,23 @@ import { FileViewComponent } from './file-view/file-view.component';
 import { BlobViewComponent } from './file-view/blob-view.component';
 import { SearchComponent } from './search/search.component';
 import { BookComponent } from './book/book.component';
+import { MenuComponent } from './menu/menu.component';
+import { AppComponent } from './app.component';
 
 export const appRoutes: Routes = [
   { path: 'files/:nodeId/view', component: FileViewComponent, canActivate: [AuthGuardEcm], outlet: 'overlay' },
   { path: 'preview/blob', component: BlobViewComponent, outlet: 'overlay', pathMatch: 'full' },
   {
     path: '',
-    component: AppLayoutComponent,
+    component: AppComponent,
     children: [
               {
                   path: '',
-                  component: HomeComponent
+                  component: LoginComponent
               },
               {
-                path: 'home',
-                component: HomeComponent
-            },
-              {
-                path: 'apps',
-                component: AppsComponent,
-                canActivate: [ AuthGuardBpm ]
+                path: 'menu',
+                component: MenuComponent
               },
               {
                 path: 'search',
@@ -60,21 +57,21 @@ export const appRoutes: Routes = [
                 component: BookComponent,
                 canActivate: [ AuthGuardBpm ]
               },
-              {
-                path: 'apps/:appId/tasks',
-                component: TasksComponent,
-                canActivate: [ AuthGuardBpm ]
-              },
-              {
-                path: 'apps/:appId/tasks/:taskId',
-                component: TaskDetailsComponent,
-                canActivate: [ AuthGuardBpm ]
-              },
-              {
-                path: 'apps/:appId/start-process',
-                component: StartProcessComponent,
-                canActivate: [ AuthGuardBpm ]
-              }
+              // {
+              //   path: 'apps/:appId/tasks',
+              //   component: TasksComponent,
+              //   canActivate: [ AuthGuardBpm ]
+              // },
+              // {
+              //   path: 'apps/:appId/tasks/:taskId',
+              //   component: TaskDetailsComponent,
+              //   canActivate: [ AuthGuardBpm ]
+              // },
+              // {
+              //   path: 'apps/:appId/start-process',
+              //   component: StartProcessComponent,
+              //   canActivate: [ AuthGuardBpm ]
+              // }
 
           ]
   },

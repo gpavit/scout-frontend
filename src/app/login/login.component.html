@@ -1,4 +1,52 @@
-<adf-login
-  copyrightText="© 2018 Alfresco Software, Inc. All Rights Reserved."
-  successRoute="/apps">
-</adf-login>
+<app-menu></app-menu>
+<div class="jumbotron" id="login">
+  <div class="container-fluid h-100 text-dark">
+    <div class="row justify-content-center align-items-center h-50">
+      <div class="col col-sm-6 col-md-6 col-lg-4 ">
+        <form novalidate [formGroup]="loginForm" (ngSubmit)="login()">
+          <div *ngIf="isError == true && errorMsg" class="error"><span><i class="fa fa-exclamation-triangle"></i>{{errorMsg}}</span>
+          </div>
+          <br />
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" formControlName="username" required />
+            <div *ngIf="submitted && f.username.errors" class="error small">
+              <div *ngIf="f.username.errors.required">Username is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" required />
+            <div><a class="float-right" href="#" id="link-color" data-toggle="modal"
+                data-target="#forgottenModal">Forgotten Password?</a></div>
+            <div *ngIf="submitted && f.password.errors" class="error small">
+              <div *ngIf="f.password.errors.required">Password is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn" id="button-color">Log In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="forgottenModal" tabindex="-1" role="dialog" aria-labelledby="forgottenModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong><a class="navbar-brand" href="#">S</a>
+          Scout</strong>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="center">Forgotten Password:</p>
+        <p>Please contact the Service Desk to request a password reset</p>
+      </div>
+    </div>
+  </div>
+</div>

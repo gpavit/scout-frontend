@@ -101,10 +101,11 @@ export class SearchComponent implements OnInit {
 
           ele ['name'] === 'message' ? this.message = ele['value'] : '';
         });
+        console.log("Message", this.message);
         if (this.message && (this.f.isbn.value || this.f.workId.value)) {
-          this.errMsg = "Record not found for the ISBN/WorkID";
+          this.errMsg = this.message;
         } else if(this.message && !this.f.isbn.value && !this.f.workId.value) {
-          this.errMsg = "Please Provide Search Criteria";
+          this.errMsg = this.message;
         } else {
           this.dataService.getDocId(this.docId);
           this.dataService.getSubject(this.subject);
