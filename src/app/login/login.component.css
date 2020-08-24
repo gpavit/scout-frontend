@@ -3,6 +3,7 @@
 }
 
 #login {
+    margin-top: 2cm;
     background-color: white;
 }
 
@@ -18,7 +19,7 @@
 
 #forgottenModal {
     color: navy;
-    margin-top: 5%;
+    margin-top: 7%;
 }
 
 #center {

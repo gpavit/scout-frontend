@@ -1,48 +1,35 @@
 <div class="container-fluid mt-4" id="menu">
   <!--Navbar-->
-  <nav class="navbar navbar-default fixed-top navbar-light bg-light">
-    <!-- Navbar brand -->
-    <span class="navbar-brand mb-0 h1">S</span>
-    <ul class="navbar-nav text-right mr-4" id="person" *ngIf="isUserLoggedIn == true">
-      <li class="nav-item dropdown">
-        <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          <i class="fa fa-user-circle"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right align-item-right" id="drop"
-          aria-labelledby="navbarDropdownMenuLink" *ngIf="userDetails">
-          <a class="dropdown-item inactiveLink">User: {{userDetails.firstName + ' ' + userDetails.lastName}}</a>
-          <a class="dropdown-item inactiveLink">Role: {{userDetails.userGroup}}</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()">Sign Out</a>
-        </div>
-      </li>
-    </ul>
-    <!-- Collapse button -->
-<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar" *ngIf="isUserLoggedIn == true"><span
-        class="navbar-toggler-icon"></span></button>-->
-        <ul class="navbar-nav" id="hamburger">
+  <nav class="navbar fixed-top navbar-light bg-light" id="navbar">
+      <!-- Navbar brand -->
+      <a class="navbar-brand" href="#">S Scout: Development Environment</a>
+      <ul class="navbar-nav text-right mr-4" id="person" *ngIf="isUserLoggedIn === true">
           <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" data-target="#collapsingNavbar" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-bars"></i>
-            </a>
+              <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user-circle"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right align-item-right" id="drop" aria-labelledby="navbarDropdownMenuLink" *ngIf="userDetails">
+                  <a class="dropdown-item inactiveLink">User: {{userDetails.firstName + ' ' + userDetails.lastName}}</a>
+                  <a class="dropdown-item inactiveLink">Role: {{userDetails.userGroup}}</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item link" (click)="logout()">Sign Out</a>
+              </div>
+          </li>
+      </ul>
+      <!-- Collapse button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar" *ngIf="isUserLoggedIn === true"><span class="navbar-toggler-icon"></span></button>
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="collapsingNavbar" *ngIf="isUserLoggedIn == true">
+          <!-- Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item" id="menu_list">
+            <a class="nav-link" [routerLink]="['/search']"><img src="assets/img/arrow.jpg" id="image">Search home page</a>
+            <a class="nav-link" href="#"><img src="assets/img/arrow.jpg" id="image">Reports-Pentaho</a>
           </li>
         </ul>
-    <!-- Collapsible content -->
-    <div class="dropdown-menu dropdown-menu-right align-item-right" id="collapsingNavbar" *ngIf="isUserLoggedIn == true">
-      <!-- Links -->
-      <ul class="navbar-nav mr-4">
-<!--        <li class="nav-item" *ngFor="let data of userPermission">
-          <a class="nav-link" href="#"><img src="assets/img/arrow.jpg" id="image">{{data.description}}</a>
-        </li>-->
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/search']"><img src="assets/img/arrow.jpg" id="image">Search home page</a>
-          <a class="nav-link" href="#"><img src="assets/img/arrow.jpg" id="image">Reports-Pentaho</a>
-        </li>
-      </ul>
-      <!-- Links -->
-    </div>
-    <!-- Collapsible content -->
-  </nav>
-  <!--/.Navbar-->
-</div>
+        <!-- Links -->
+      </div>
+      <!-- Collapsible content -->
+    </nav>
+    <!--/.Navbar-->
+  </div>

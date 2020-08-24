@@ -41,10 +41,10 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
-    this.isUserLoggedIn = false;
     this.authService.logout().subscribe(() => {
       this.router.navigate(['/login']);
     });
+    console.log(this.isUserLoggedIn);
   }
 
 }

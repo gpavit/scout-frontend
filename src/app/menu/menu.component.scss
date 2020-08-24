@@ -1,5 +1,11 @@
 #menu {
   color: navy;
+  font-family: sans-serif;
+  font-size: 8px;
+}
+
+#navbar {
+  flex-wrap: nowrap;
 }
 
 .navbar-toggler {
@@ -13,11 +19,13 @@
   padding: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
+  background-color: #fff;
   color: #212529;
+  z-index: auto;
 }
 
 #person {
-  margin-left: 95%;
+  margin-left: 80%;
   font-size: 1.5rem;
 }
 
@@ -42,9 +50,18 @@
   border-radius: 0.25rem;
 }
 
+#menu_list {
+  font-size: 1rem;
+  padding: 0;
+}
+
 .inactiveLink {
   pointer-events: none;
   cursor: default;
+}
+
+.link {
+  cursor: pointer;
 }
 
 #image {
