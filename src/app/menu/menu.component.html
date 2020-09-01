@@ -3,7 +3,7 @@
   <nav class="navbar fixed-top navbar-light bg-light" id="navbar">
       <!-- Navbar brand -->
       <a class="navbar-brand" href="#">S Scout: Development Environment</a>
-      <ul class="navbar-nav text-right mr-4" id="person" *ngIf="isUserLoggedIn === true">
+      <ul class="navbar-nav text-right mr-4" id="person" *ngIf="isUserLoggedIn">
           <li class="nav-item dropdown">
               <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-user-circle"></i>
@@ -17,9 +17,9 @@
           </li>
       </ul>
       <!-- Collapse button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar" *ngIf="isUserLoggedIn === true"><span class="navbar-toggler-icon"></span></button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar" *ngIf="isUserLoggedIn"><span class="navbar-toggler-icon"></span></button>
       <!-- Collapsible content -->
-      <div class="collapse navbar-collapse" id="collapsingNavbar" *ngIf="isUserLoggedIn == true">
+      <div class="collapse navbar-collapse" id="collapsingNavbar" *ngIf="isUserLoggedIn">
           <!-- Links -->
         <ul class="navbar-nav">
           <li class="nav-item" id="menu_list">

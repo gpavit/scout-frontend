@@ -53,6 +53,7 @@ import { AuthorizationService } from './services/authorization.service';
 import { MenuComponent } from './menu/menu.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { BPMService } from './services/bpm.service';
 
 
 registerLocaleData(localeFr);
@@ -109,6 +110,7 @@ registerLocaleData(localeSv);
         PreviewService,
         DataService,
         AuthorizationService,
+        BPMService,
 /*        {
             provide: HTTP_INTERCEPTORS, 
             useClass: TokenInterceptor, 

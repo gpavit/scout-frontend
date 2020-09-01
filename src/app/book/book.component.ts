@@ -7,6 +7,7 @@ import { ProcessService, ProcessInstance } from '@alfresco/adf-process-services'
 import { AppDefinitionRepresentation, ProcessDefinitionRepresentation } from '@alfresco/js-api';
 import * as moment from 'moment';
 import { DataService } from 'app/services/data.service';
+import { AuthorizationService } from 'app/services/authorization.service';
 
 @Component({
   selector: 'app-book',
@@ -31,10 +32,11 @@ export class BookComponent implements OnInit {
   message: string = "";
   countryData = [];
   code: any = "";
+  token: string = "";
 
   constructor(private appProcessService: AppsProcessService,
     private processService: ProcessService, private formBuilder: FormBuilder,
-    private apiService: AlfrescoApiService, private dataService: DataService) {
+    private apiService: AlfrescoApiService, private dataService: DataService, private authorizationService: AuthorizationService) {
     this.demoForm = this.formBuilder.group({
       country: ['', Validators.required],
       countryCode: [''],
@@ -57,6 +59,10 @@ export class BookComponent implements OnInit {
     this.dataService.doi$.subscribe((data) => {
       this.doi = data
       console.log("Doi", this.doi);
+    });
+    this.dataService.token$.subscribe((data) => {
+      this.token = data;
+      console.log("Ticket", this.token);
     });
     setTimeout(() => {
       this.getAppName();
@@ -112,8 +118,7 @@ export class BookComponent implements OnInit {
   }
 
   getCountry() {
-    this.apiService.getInstance().webScript.executeWebScript('GET', 'countries', null, 'activiti-app',
-      'api/enterprise', null).then(res => {
+    this.authorizationService.getCountryList(this.token).subscribe(res => {
         this.countryData = res.countryList;
         console.log("Country Data", this.countryData);
       });

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthorizationService } from 'app/services/authorization.service';
 import { DataService } from 'app/services/data.service';
 
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -17,10 +18,10 @@ export class MenuComponent implements OnInit {
   token: string = "";
   
   constructor(private authService: AuthenticationService, private apiService: AlfrescoApiService, private router: Router, private authorizationService: AuthorizationService,
-    private dataService: DataService) { }
+    private dataService: DataService) { 
+    }
 
   ngOnInit() {
-    this.isUserLoggedIn = false;
     this.dataService.token$.subscribe((data) => {
       this.token = data;
       console.log("Ticket", this.token);
@@ -36,6 +37,7 @@ export class MenuComponent implements OnInit {
           console.log("User Details", this.userDetails);
         });
     });
+//    this.isUserLoggedIn = this.authService.isLoggedIn() ? this.authService.isLoggedIn() : JSON.parse(localStorage.getItem("refreshData"));
     this.isUserLoggedIn = this.authService.isLoggedIn();
     console.log("User Logged in Status", this.isUserLoggedIn);
   }
