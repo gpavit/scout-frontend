@@ -56,6 +56,10 @@ export class MenuComponent implements OnInit {
           this.storageService.setItem("userLName", res.lastName);
           this.storageService.setItem("userGroup", res.userGroup);
           console.log("User Details", this.userDetails);
+          this.userFName = this.storageService.getItem("userFName");
+          this.userLName = this.storageService.getItem("userLName");
+          this.userGroup = this.storageService.getItem("userGroup");
+          this.userName = this.userFName + ' ' + this.userLName;
         });
     });
   }
@@ -65,8 +69,6 @@ export class MenuComponent implements OnInit {
     this.authService.logout().subscribe(() => {
       this.router.navigate(['/login']);
     });
-    this.isUserLoggedIn = false;
-    console.log(this.isUserLoggedIn);
     this.storageService.clear();
   }
 

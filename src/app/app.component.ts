@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { TranslationService, AuthenticationService } from '@alfresco/adf-core';
+import { TranslationService, AuthenticationService, AppConfigService, AppConfigValues} from '@alfresco/adf-core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,14 +12,16 @@ export class AppComponent {
 
   constructor(translationService: TranslationService,
               private authService: AuthenticationService,
-              private router: Router) {
+              private router: Router,
+              private appConfigService: AppConfigService) {
     translationService.use('en');
+    console.log("_____", this.appConfigService.get<string>(AppConfigValues.BPMHOST));
   }
-
+/*
   logout() {
     this.authService.logout().subscribe(() => {
       this.router.navigate(['/login']);
     });
   }
-
+*/
 }
