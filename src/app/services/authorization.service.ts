@@ -6,8 +6,12 @@ import { DataService } from './data.service';
 
 @Injectable()
 export class AuthorizationService {
+//    permissionUrl = "http://10.228.154.136:8080/activiti-app/api/enterprise/permission/";
+//    countryUrl = "http://10.228.154.136:8080/activiti-app/api/enterprise/countries";
     permissionUrl = "http://10.228.154.155:8083/activiti-app/api/enterprise/permission/";
     countryUrl = "http://10.228.154.155:8083/activiti-app/api/enterprise/countries";
+//    permissionUrl = "https://devworkflow.content.oup.com/activiti-app/api/enterprise/permission/";
+//    countryUrl = "https://devworkflow.content.oup.com/activiti-app/api/enterprise/countries";
     token: any = "";
     
     constructor(private http: HttpClient, private dataService: DataService) {

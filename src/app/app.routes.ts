@@ -31,6 +31,7 @@ import { SearchComponent } from './search/search.component';
 import { BookComponent } from './book/book.component';
 import { MenuComponent } from './menu/menu.component';
 import { AppComponent } from './app.component';
+import { BookViewComponent } from './book-view/book-view.component';
 
 export const appRoutes: Routes = [
   { path: 'files/:nodeId/view', component: FileViewComponent, canActivate: [AuthGuardEcm], outlet: 'overlay' },
@@ -57,6 +58,11 @@ export const appRoutes: Routes = [
                 component: BookComponent,
                 canActivate: [ AuthGuardBpm ]
               },
+              {
+                path: 'book-view',
+                component: BookViewComponent,
+                canActivate: [ AuthGuardBpm ]
+              }
               // {
               //   path: 'apps/:appId/tasks',
               //   component: TasksComponent,

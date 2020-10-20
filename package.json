@@ -18,8 +18,8 @@
   "dependencies": {
     "@alfresco/adf-content-services": "3.9.0",
     "@alfresco/adf-core": "3.9.0",
-    "@alfresco/adf-insights": "3.9.0",
     "@alfresco/adf-extensions": "3.9.0",
+    "@alfresco/adf-insights": "3.9.0",
     "@alfresco/adf-process-services": "3.9.0",
     "@alfresco/js-api": "3.9.0",
     "@angular/animations": "7.0.3",
@@ -38,6 +38,7 @@
     "@mat-datetimepicker/core": "^2.0.1",
     "@mat-datetimepicker/moment": "^2.0.1",
     "@ngx-translate/core": "^11.0.0",
+    "@types/underscore": "^1.10.24",
     "chart.js": "2.5.0",
     "classlist.js": "1.1.20150312",
     "core-js": "^2.5.4",
@@ -52,6 +53,7 @@
     "reflect-metadata": "0.1.10",
     "rxjs": "^6.2.2",
     "systemjs": "0.19.27",
+    "underscore": "^1.11.0",
     "web-animations-js": "2.3.1",
     "zone.js": "~0.8.26"
   },

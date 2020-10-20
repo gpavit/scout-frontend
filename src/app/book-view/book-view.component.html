@@ -1,0 +1,641 @@
+<!--<app-menu></app-menu>-->
+<div class="h-150 mb-2 p-3 border" id="book-view">
+  <form novalidate #myForm="ngForm" [formGroup]="bookViewForm">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border" id="top">
+      <div class="container-fluid" id="custom-container">
+        <a class="nav-link" id="topic-size"><img src="assets/img/SCOUT_icon_circle.jpg" id="logo">
+          Scout: Development Environment
+        </a>
+        <a class="nav-link" id="mandatory1">Title: Endocrinology</a>
+        <a class="nav-link">
+          Subtitle: A Very Short Introduction
+        </a>
+
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <button class="btn" id="button-color">Refresh source data</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn" id="button-color" (click)="saveData()" data-toggle="modal"
+              data-target="#saveModal">Save</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn" id="button-color">Undo</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn" id="button-color" (click)="publishData()">Publish Data</button>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" style="font-size: 2rem;">
+              <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right align-item-right" id="drop"
+              aria-labelledby="navbarDropdownMenuLink" *ngIf="userName || userGroup">
+              <a class="dropdown-item inactiveLink">User:
+                {{userName ? userName : (userFName + ' ' + userLName)}}</a>
+              <a class="dropdown-item inactiveLink">Role:
+                {{userGroup}}</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item link" (click)="logout()">Sign Out</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" style="font-size: 2rem;">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right align-item-right" id="drop-1"
+              aria-labelledby="navbarDropdownMenuLink" *ngIf="userName || userGroup">
+              <a class="dropdown-item link" [routerLink]="['/search']"><img src="assets/img/arrow.jpg" id="image">Search home
+                page</a>
+              <a class="dropdown-item"><img src="assets/img/arrow.jpg" id="image">Reports-Pentaho</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row small mt-2 ml-1 p-3 w-100">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="form_series_digital">Series (Digital): Very Short Introductions</label>
+        </div>
+        <div class="form-group">
+          <label for="form_set">Set Title: Endocrinology</label>
+        </div>
+        <div class="form-group">
+          <label for="form_coll">Online Collection: Oxford Scholarship Online</label>
+        </div>
+        <div class="form-group">
+          <label for="form_print_publish">Print Publication Date: 2020-10-26</label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="form_series_title">Series Title: Very Short Introductions</label>
+        </div>
+        <div class="form-group">
+          <label for="form_volume">Volume Title: Hormones</label>
+        </div>
+        <div class="form-group form-inline">
+          <label for="form_coll_sub">Online Collection Subject: </label>
+          <input type="text" class="form-control small mx-sm-3" style="width: 50%;" formControlName="collectionModuleBK"
+            [ngStyle]="changeCollection && {'border-color': 'red'}" />
+        </div>
+        <div class="error" id="err" *ngIf="subjectErrMsg">
+          {{subjectErrMsg}}
+        </div>
+        <div class="error" id="highlight-text" *ngIf="changeCollection">
+          {{changeCollection}}
+        </div>
+        <div class="form-group form-inline">
+          <label for="form_online_publish">Online Publication Date: 2020-10-26
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Extent: </label>
+          <input type="text" class="form-control small mx-sm-3" formControlName="extentBK"
+            [ngStyle]="changeExtent && {'border-color': 'red'}" readonly />
+        </div>
+        <div class="error" id="err" *ngIf="extenkBKErrMsg">
+          {{extenkBKErrMsg}}
+        </div>
+        <div class="error" id="highlight-text" *ngIf="changeExtent" style="margin-left: 65%;">
+          {{changeExtent}}
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label></label>
+        </div>
+        <div class="form-inline">
+          <label class="my-1 mr-2" for="form_volume_number">Volume Number:</label>
+          <div class="input-group mb-2 mr-sm-2">
+            <input type="text" class="form-control" id="form_volume_number" placeholder="2">
+          </div>
+        </div>
+        <div class="form-group">
+          <label></label>
+        </div>
+        <div class="form-group">
+          <label></label>
+        </div>
+      </div>
+    </div>
+
+    <div id="accordion" class="accordion content">
+      <div class="card mb-0" id="scroll">
+        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          <a class="card-title"> Book Identifiers </a>
+          <i class="fa fa-caret-down" aria-hidden="true" id="icon"></i>
+        </div>
+        <div id="collapseTwo" class="card-body collapse" data-parent="#accordion">
+          <div class="text-right text-danger" id="mandatory">
+            <label>* Mandatory field for Publication</label>
+          </div>
+          <div class="row small mt-2 mb-2 ml-1 mr-1 p-3">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="form_setid">Set ID: 9780192579517</label>
+              </div>
+              <div class="form-group">
+                <label for="form_workid">Work ID: USAC003831</label>
+              </div>
+              <div class="form-group">
+                <label for="form_isbn" id="form_isbn">ISBNs</label>
+              </div>
+              <!--
+              <div class="form-group" *ngFor="let data of isbn_display1; ">
+                <label for="form_online">{{data}}</label>
+              </div>              
+            -->
+
+              <div class="form-group" *ngFor="let data of isbn_online_array">
+                <label for="form_online">Online: {{data.isbnElectronic}}</label>
+              </div>
+              <div class="form-group" *ngFor="let data of isbn_hb_array">
+                <label for="form_hardback">Hardback: {{data.isbnPrinthb}}</label>
+              </div>
+              <div class="form-group" *ngFor="let data of isbn_pb_array">
+                <label for="form_paperback">Paperback: {{data.isbnPrintpb}}</label>
+              </div>
+              <div class="form-group">
+                <label></label>
+              </div>
+              <br />
+              <br />
+              <br />
+              <br />
+              <div class="form-inline">
+                <label class="my-1 mr-2" for="form_edition">Edition Number:
+                  {{ediNbrBK == 0 ? '' : ediNbrBK + '.'}}</label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control" id="form_edition" formControlName="editionRevisionNo"
+                    (blur)="validateEditionRevision()" [ngStyle]="(changeeditionRevisionNo && {'border-color': 'red'}) || ediNbrBkErrMSg && {'border': 'none'}" />
+                </div>
+              </div>
+              <div class="error" id="err" *ngIf="ediNbrBkErrMSg">
+                {{ediNbrBkErrMSg}}
+              </div>
+              <div class="error" id="err" *ngIf="bookViewForm.get('editionRevisionNo').touched && ediRevNbrErrMsg">
+                {{ediRevNbrErrMsg}}
+              </div>
+              <div class="error" id="highlight-text" *ngIf="changeeditionRevisionNo">
+                {{changeeditionRevisionNo}}
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label></label>
+              </div>
+              <div class="form-group form-inline">
+                <label for="form_doi">DOI<span id="mandatory">*</span>: </label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control" id="form_doi"
+                    placeholder="10.5743/carlo/978019182338.001.0001" formControlName="doi"
+                    [ngStyle]="changedoi && {'border-color': 'red'}" readonly />
+                </div>
+              </div>
+              <div class="error" id="err" *ngIf="doiErrMsg">
+                {{doiErrMsg}}
+              </div>
+              <div class="error" id="highlight-text" *ngIf="changedoi">
+                {{changedoi}}
+              </div>
+              <div class="form-group">
+                <label class="my-1 mr-2 control-label col-sm-4 col-form-label"></label>
+              </div>
+              <div class="form-group" *ngFor="let data of isbn_updf_array">
+                <label for="form_ebook_updf">eBook uPDF:
+                  {{data.isbnEbookuPdf}}</label>
+              </div>
+              <div class="form-group" *ngFor="let data of isbn_other_array">
+                <label for="form_other_print">Other Print: {{data.isbnPrintOther}}</label>
+              </div>
+              <div class="form-group">
+                <label>
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                </label>
+              </div>
+              <br />
+              <br />
+              <br />
+              <br />
+              <div class="form-inline" id="flex-flow">
+                <label for="form_edition_stat">Edition
+                  Statement: </label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control" id="form_edition_stat"
+                    formControlName="editionRevisionStatement" (blur)="validateEditionStat()"
+                    [ngStyle]="changeeditionRevisionStatement && {'border-color': 'red'}" />
+                </div>
+              </div>
+              <div class="error" id="err"
+                *ngIf="bookViewForm.get('editionRevisionStatement').touched && ediRevStatErrMsg">
+                {{ediRevStatErrMsg}}
+              </div>
+              <div class="error" id="highlight-text" *ngIf="changeeditionRevisionStatement">
+                {{changeeditionRevisionStatement}}
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label></label>
+              </div>
+              <div class="form-group">
+                <label></label>
+              </div>
+              <div class="form-group">
+                <label></label>
+              </div>
+              <br />
+              <div class="form-group" *ngFor="let data of isbn_epub_array">
+                <label for="form_ebook_epub">eBook ePub: {{data.isbnEbookePub}}</label>
+              </div>
+              <div class="form-group">
+                <label></label>
+              </div>
+              <div class="form-group">
+                <label></label>
+              </div>
+              <div class="form-group">
+                <label></label>
+              </div>
+              <br />
+              <br />
+              <div class="form-inline" id="flex-flow">
+                <label for="form_isbn_edition">ISBN of First Edition<span id="mandatory">*</span>: </label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control" id="form_isbn_edition" formControlName="isbnFirstEdition"
+                    [ngStyle]="changeisbnFirstEdition && {'border-color': 'red'}" required />
+                </div>
+              </div>
+              <div class="form-inline" id="err-message"
+                *ngIf="bookViewForm.submitted || (bookViewForm.get('isbnFirstEdition').hasError('required') && bookViewForm.get('isbnFirstEdition').touched)">
+                An edition set identifier must be entered
+              </div>
+              <div class="error" id="highlight-text" *ngIf="changeisbnFirstEdition">
+                {{changeisbnFirstEdition}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          <a class="card-title"> Author/Editors/Compilers </a>
+          <i class="fa fa-caret-down" aria-hidden="true" id="icon"></i>
+        </div>
+        <div id="collapseThree" class="collapse" data-parent="#accordion">
+          <nav class="navbar navbar-expand-lg text-white border mt-1" id="nav-color">
+            <div class="container-fluid nav">
+              <a class="navbar-brand" id="nav-a-color">
+                Author,Editors,Compilers
+              </a>
+            </div>
+          </nav>
+          <div class="card-body">
+            <div>
+              <a><i class="fa fa-plus" id="icon-plus"></i>Author,Editors,Compilers</a>
+              <a class="text-right text-danger" id="mandatory">* Mandatory field for Publication</a>
+            </div>
+            <div class="container-fluid mt-2 ml-1 p-3 border">
+              <div class="row small">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="form_title">Title: Prof.</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="form_name">Given Name: Ruth Helen</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="form_surname">Surname*: Langley</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="form_suffix">Suffix: III</label>
+                  </div>
+                  <br />
+                  <div class="form-group">
+                    <label for="form_starjob">STAR Job Title/s: Adjunct Senior Lecturer, Religious Studies, Walkato
+                      University,
+                      and Honorary Research Fellow, Departments of Hebrew and Jewish Studies, and in History</label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="form_role">Role Type<span id="mandatory">*</span>: Author</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="form_role_1">Role 1<span id="mandatory">*</span>: Principal Author</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="form_role_2">Role 2: </label>
+                  </div>
+                  <div class="form-group">
+                    <label for="form_qualif">Qualifications/hons: PhD</label>
+                  </div>
+                  <br />
+                  <div class="form-group">
+                    <label for="form_starname">Adjunct Senior Lecturer, Religious Studies, Walkato University,
+                      Hamilton,
+                      New
+                      Zealand and Honorary Research Fellow, Departments of Hebrew and Jewish Studies, and in History,
+                      University
+                      College London</label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="form_contributor">Contributor Order: 1</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="form_orcid">ORCID</label>
+                    <input id="form_orcid" type="text" name="orcid" class="form-control small"
+                      placeholder="Enter Contributor ORCID e.g. 1234-4321-5643-5632" style="font-size: 13px !important;"
+                      readonly />
+                  </div>
+                  <div class="form-group">
+                    <label for="form_website">Website</label>
+                    <input id="form_website" type="text" name="website" class="form-control small"
+                      placeholder="Enter Contributor Website" style="font-size: 13px !important;" readonly />
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row small">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="form_jobtitle">Job Title</label>
+                    <input id="form_jobtitle" type="text" name="jobtitle" class="form-control small"
+                      placeholder="Senior Lectrer in Philosophy" style="font-size: 13px !important;" />
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label for="form_affname">Affiliation Name</label>
+                    <input id="form_affname" type="text" name="affname" class="form-control small"
+                      placeholder="University of East Anglia" style="font-size: 13px !important;" />
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label for="form_name">Affiliation Address</label>
+                    <input id="form_affadd" type="text" name="affadd" class="form-control small"
+                      placeholder="Enter Affiliation Address (not Inc. department name)"
+                      style="font-size: 13px !important;" readonly />
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label for="form_country">Country</label>
+                    <input id="form_country" type="text" name="country" class="form-control small country_border"
+                      matInput [matAutocomplete]="auto" formControlName="country" required />
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async"
+                        [value]="option.name ? option.name : (option.iso_code || option.synonym)">
+                        {{option.name ? option.name : (option.iso_code || option.synonym)}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <div class="error"
+                      *ngIf="bookViewForm.get('country').hasError('required') && bookViewForm.get('country').touched">
+                      Country is required</div>
+                    <div class="error"
+                      *ngIf="bookViewForm.get('country').hasError('min') && bookViewForm.get('country').touched">
+                      Minimum of two characters
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div>
+                <a><i class="fa fa-plus" id="icon-plus"></i>Job Title & Affiliation</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+          <a class="card-title"> Publisher and Copyright </a>
+          <i class="fa fa-caret-down" aria-hidden="true" id="icon"></i>
+        </div>
+        <div id="collapseFour" class="card-body collapse" data-parent="#accordion">
+          <div class="text-right text-danger" id="mandatory">
+            <label>* Mandatory field for Publication</label>
+          </div>
+          <div class="row small mt-2 ml-1 p-3">
+            <div class="col-sm-4">
+              <div class="form-inline" id="flex-flow">
+                <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_copyright_holder">Copyright
+                  Holder<span id="mandatory">*</span> </label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control" id="form_copyright_holder" formControlName="copyRightHolder"
+                    #copyRightHolder placeholder="Oxford University Press" required />
+                </div>
+              </div>
+              <div class="form-inline" id="err-message"
+                *ngIf="bookViewForm.submitted || (bookViewForm.get('copyRightHolder').hasError('required') && bookViewForm.get('copyRightHolder').touched)">
+                Copyright holder is required
+              </div>
+              <div class="form-inline" id="err-message"
+                *ngIf="bookViewForm.get('copyRightHolder').hasError('forbiddenName')">
+                Copyright holder must not contain the word “licence” or any licencing information.
+              </div>
+              <br />
+              <div class="form-inline" id="flex-flow">
+                <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_pub_name">Publisher Name<span
+                    id="mandatory">*</span>
+                </label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control" id="form_pub_name" placeholder="Oxford University Press">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-inline" id="flex-flow">
+                <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_copyright_year">Copyright
+                  Year<span id="mandatory">*</span>
+                </label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control" id="form_copyright_year" placeholder="2018"
+                    formControlName="copyRightYear" #copyRightYear (keypress)="allowOnlyNumber($event)" maxlength="4"
+                    required />
+                </div>
+              </div>
+              <div class="form-inline" id="err-message"
+                *ngIf="bookViewForm.submitted || (bookViewForm.get('copyRightYear').hasError('required') && bookViewForm.get('copyRightYear').touched)">
+                Copyright Year is required
+              </div>
+              <div class="error" id="err-message"
+                *ngIf="(bookViewForm.get('copyRightYear').hasError('pattern') || bookViewForm.get('copyRightYear').hasError('min') || bookViewForm.get('copyRightYear').hasError('max')) && bookViewForm.get('copyRightYear').touched">
+                Please enter a 4 digit year between 1700 and 2100
+              </div>
+              <br />
+              <div class="form-inline" id="flex-flow">
+                <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_pub_place">Publisher Place<span
+                    id="mandatory">*</span>
+                </label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control" id="form_pub_place" placeholder="Oxford">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-inline" id="flex-flow">
+                <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_copyright_stat">Copyright
+                  Statement<span id="mandatory">*</span> </label>
+                <!--<div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control border-0 shadow-none" id="form_copyright_stat" formControlName="copyrightStatement"
+                    placeholder="Oxford University Press 2018" readonly />
+                    <i class="fa fa-copyright" aria-hidden="true"></i>
+                </div>-->
+                <div class="input-group mb-2 mr-sm-2">
+                  <label class="form-control border-0 shadow-none" id="font"><i class="fa fa-copyright"
+                      aria-hidden="true"></i>{{' ' + copyRightHolder.value + ' ' + copyRightYear.value}}</label>
+                </div>
+              </div>
+              <div class="form-inline" id="err-message"
+                *ngIf="bookViewForm.submitted || (bookViewForm.get('copyRightStatement').hasError('required') && bookViewForm.get('copyRightStatement').touched)">
+                Copyright Statement is required
+              </div>
+              <br />
+              <div class="form-inline" id="flex-flow">
+                <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_pub_country">Publisher Country
+                </label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="text" class="form-control" id="form_pub_country" placeholder="United Kingdom">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+          <a class="card-title"> External Partnerships: Funding, Open Access, Collaboration & Affiliate Logos </a>
+          <i class="fa fa-caret-down" aria-hidden="true" id="icon"></i>
+        </div>
+        <div id="collapseFive" class="card-body collapse" data-parent="#accordion">
+          <div class="text-right text-danger" id="mandatory">
+            <label>* Mandatory field for Publication</label>
+          </div>
+          <div class="container-fluid mt-2 ml-1 mb-1 p-3 border w-75 h-25">
+            <div class="row small">
+              <div class="col-sm-6">
+                <div class="form-inline">
+                  <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_funding_ins_name">Funding
+                    Institution Name: </label>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <input type="text" class="form-control" id="form_funding_ins_name"
+                      placeholder="Search and Select Funding Institution">
+                    <!--<div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>-->
+                  </div>
+                </div>
+                <div class="form-inline">
+                  <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_funding_award">Funding
+                    Award
+                    ID:
+                  </label>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <input type="text" class="form-control" id="form_funding_award_id"
+                      placeholder="Enter a Funding Award ID">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-inline">
+                  <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_funding_ins_id">Funding
+                    Institution
+                    ID: </label>
+                </div>
+                <div class="form-inline">
+                  <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_funding_award_type">Funding
+                    Award
+                    Type: Grant</label>
+                </div>
+              </div>
+            </div>
+            <br />
+          </div>
+          <div class="row small mt-2 ml-1 mb-1 p-3">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="form_open_access">Open Access: Yes</label>
+              </div>
+              <div class="form-group">
+                <label for="form_coll_partner">Collaboration Partner: Heart Research Group</label>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-inline">
+                <label class="my-1 mr-2 control-label col-sm-4 col-form-label" for="form_licence_type">Licence Type*
+                </label>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    CC BY 3.0 IGO
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item selected">CC BY 3.0 IGO</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid form-horizontal mt-2 ml-1 mb-1 p-3 border w-50 h-25">
+            <a class="float-right" id="minus-circle"><i class="fa fa-minus-circle" aria-hidden="true" id="icon"></i></a>
+            <br />
+            <div class="form-group row small">
+              <label for="form_aff_logo" class="control-label col-sm-4 col-form-label">Affiliate Logo Filename
+                <span id="mandatory">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control small" id="aff_logo" name="aff_logo" />
+              </div>
+            </div>
+            <div class="form-group row small">
+              <label for="form_aff_logo_alttext" class="control-label col-sm-4 col-form-label">Affiliate Logo Alt Text
+                <span id="mandatory">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control small" style="width: 30%;" id="aff_logo_alttext"
+                  name="aff_logo_alttext" required />
+              </div>
+            </div>
+            <div class="form-group row small">
+              <label for="form_aff_logo_uri" class="control-label col-sm-4 col-form-label">Affiliate Logo URI
+                <span id="mandatory">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control small" id="aff_logo_uri" name="aff_logo_uri" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+          <a class="card-title"> Classifications </a>
+          <i class="fa fa-caret-down" aria-hidden="true" id="icon"></i>
+        </div>
+        <div id="collapseSix" class="card-body collapse" data-parent="#accordion">
+          <div class="text-right text-danger" id="mandatory">
+            <label>* Mandatory field for Publication</label>
+          </div>
+          <p>To Do...</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong><a class="navbar-brand">S</a>
+          Scout</strong>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="center">{{successMessage}}</p>
+      </div>
+    </div>
+  </div>
+</div>

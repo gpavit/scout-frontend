@@ -2,15 +2,17 @@
   <!--Navbar-->
   <nav class="navbar fixed-top navbar-light bg-light" id="navbar">
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">S Scout: Development Environment</a>
-    <ul class="navbar-nav text-right mr-4" id="person" *ngIf="isUserLoggedIn">
+    <span class="navbar-brand"><img src="assets/img/SCOUT_icon_circle.jpg" id="logo">
+      Scout: Development Environment
+    </span>
+     <ul class="navbar-nav text-right mr-4" id="person" *ngIf="isUserLoggedIn">
       <li class="nav-item dropdown">
         <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
-          <i class="fa fa-user-circle"></i>
+          <i class="fa fa-user-circle-o" aria-hidden="true"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right align-item-right" id="drop"
-          aria-labelledby="navbarDropdownMenuLink" *ngIf="userDetails || userName || userGroup">
+          aria-labelledby="navbarDropdownMenuLink" *ngIf="userDetails || userGroup">
           <a class="dropdown-item inactiveLink">User:
             {{userName ? userName : (userDetails.firstName + ' ' + userDetails.lastName)}}</a>
           <a class="dropdown-item inactiveLink">Role: {{userDetails.userGroup ? userDetails.userGroup : userGroup}}</a>
@@ -28,7 +30,7 @@
       <ul class="navbar-nav">
         <li class="nav-item" id="menu_list">
           <a class="nav-link" [routerLink]="['/search']"><img src="assets/img/arrow.jpg" id="image">Search home page</a>
-          <a class="nav-link" href="#"><img src="assets/img/arrow.jpg" id="image">Reports-Pentaho</a>
+          <a class="nav-link"><img src="assets/img/arrow.jpg" id="image">Reports-Pentaho</a>
         </li>
       </ul>
       <!-- Links -->

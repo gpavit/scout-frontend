@@ -1,8 +1,9 @@
+<app-menu></app-menu>
 <div class="jumbotron" id="login">
   <div class="container-fluid h-100 text-dark">
     <div class="row justify-content-center align-items-center h-50">
       <div class="col col-sm-6 col-md-6 col-lg-4 ">
-        <form novalidate [formGroup]="loginForm" (ngSubmit)="login()">
+        <form novalidate [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
           <div *ngIf="isError == true && errorMsg" class="error"><span><i class="fa fa-exclamation-triangle"></i>{{errorMsg}}</span>
           </div>
           <br />

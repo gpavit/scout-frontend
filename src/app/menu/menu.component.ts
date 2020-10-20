@@ -35,16 +35,19 @@ export class MenuComponent implements OnInit {
     this.userGroup = this.storageService.getItem("userGroup");
     this.userName = this.userFName + ' ' + this.userLName;
     console.log("userName", this.userName);
+    console.log("Uset log in status from oninit", this.isUserLoggedIn);
     this.getUserAccess();
   }
 
   ngOnChanges() {
+    this.isUserLoggedIn = JSON.parse(this.storageService.getItem("refreshData"));
     this.userFName = this.storageService.getItem("userFName");
     this.userLName = this.storageService.getItem("userLName");
     this.userGroup = this.storageService.getItem("userGroup");
     this.userName = this.userFName + ' ' + this.userLName;
     console.log("userName", this.userName);
     console.log("userGroup", this.userGroup);
+    console.log("Uset log in status from onchanges", this.isUserLoggedIn);
   }
 
   getUserAccess() {

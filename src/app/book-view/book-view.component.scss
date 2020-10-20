@@ -1,0 +1,299 @@
+body {
+    overflow: hidden;
+}
+
+#button-color {
+    background-color: navy;
+    color: white;
+}
+
+.btn {
+    margin-left: 10px;
+}
+
+#book-view {
+    width: 90% !important;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-family: sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: navy;
+    margin-top: 10%;
+}
+
+.fixed-top {
+    top: 0cm !important;
+}
+
+.sticky-top {
+    position: fixed !important;
+    top: 10 !important;
+    width: 87.5% !important;
+}
+
+#book-view.scrolled {
+    background-color: #fff !important;
+    transition: background-color 800ms linear;
+}
+
+a {
+    color: navy !important;
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+#topic-size {
+    width: 25% !important;
+}
+
+input {
+    font-family: sans-serif;
+    font-size: 0.7rem;
+}
+
+#font {
+    font-size: 1rem;
+}
+#list {
+    list-style: none;
+    float: right;
+}
+
+#icon {
+    float: right;
+}
+
+#icon-plus {
+    margin-right: 0.5%;
+}
+
+.required .control-label:after {
+    content: "*";
+    color: red;
+}
+
+#form_volume_number,
+#form_edition {
+    flex: none !important;
+    width: 20% !important;
+}
+
+#mandatory {
+    font-size: 0.8rem;
+    font-weight: bold;
+    float: right;
+    /*    color: red !important;*/
+}
+
+#form_isbn {
+    font-weight: bold;
+}
+
+#nav-color {
+    background-color: navy;
+}
+
+#nav-a-color {
+    color: white !important;
+}
+
+#err {
+    color: red;
+}
+
+#highlight-text {
+    color: red;
+    margin-left: 45%;
+    border-color: red;
+}
+
+#input-error {
+    border-color: red;
+}
+
+/* Overriding styles */
+
+::-webkit-input-placeholder {
+    font-size: 10px !important;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    font-size: 10px !important;
+}
+::-moz-placeholder {
+    /* Firefox 19+ */
+    font-size: 10px !important;
+}
+
+#scroll {
+    height: auto;
+    overflow-y: scroll;
+}
+
+.btn-secondary {
+    background-color: white !important;
+    color: black !important;
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+p {
+    font-weight: normal;
+}
+
+#flex-flow {
+    flex-flow: nowrap !important;
+}
+
+#err-message {
+    margin-left: 35%;
+    color: red;
+}
+
+#mandatory {
+    color: red;
+}
+
+input[readonly] {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+#image {
+    vertical-align: text-top;
+    width: 10%;
+}
+
+#center {
+    text-align: center;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    overflow: hidden;
+    z-index: 10;
+    width: 100%;
+    background-color: white;
+}
+
+.content {
+    height: 200vh;
+}
+
+#menu {
+    color: navy;
+    font-family: sans-serif;
+    font-size: 8px;
+}
+
+#navbar {
+    flex-wrap: nowrap;
+}
+
+.navbar-toggler {
+    cursor: pointer;
+}
+#collapsingNavbar {
+    position: fixed;
+    top: 1.7cm;
+    right: 0.5cm;
+    width: 16%;
+    padding: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    background-color: #fff;
+    color: #212529;
+    z-index: auto;
+}
+
+#person {
+    margin-left: 70%;
+    font-size: 1.9rem;
+}
+
+#heading {
+    display: flex;
+}
+
+#hamburger {
+    font-size: 1.5rem;
+}
+
+#drop {
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+#drop-1 {
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0.5rem;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+
+#menu_list {
+    font-size: 1rem;
+    padding: 0;
+}
+
+.inactiveLink {
+    pointer-events: none;
+    cursor: default;
+}
+
+.link {
+    cursor: pointer;
+}
+
+#image {
+    vertical-align: text-top;
+    width: 20%;
+}
+
+#logo {
+    width: 15%;
+}
+
+#top {
+    height: 90px !important;
+}
+/* width: 88% for navbar fixed-top */
+
+
+.navbar-expand-lg .navbar-toggler  {
+    @media (min-width: 992px) {
+    display: block !important;
+    }
+}
+
+.form-inline .form-control {
+    @media (min-width: 576px) {
+        width: 15%;
+    }
+}

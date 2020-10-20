@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentModule } from '@alfresco/adf-content-services';
 import { ProcessModule } from '@alfresco/adf-process-services';
-import { CoreModule, TranslateLoaderService, AppConfigService, AppConfigServiceMock } from '@alfresco/adf-core';
+import { CoreModule, TranslateLoaderService, AppConfigService, AppConfigServiceMock, AuthenticationService } from '@alfresco/adf-core';
 import { LoginComponent } from './login.component';
 import { AlfrescoApiService, AlfrescoApiServiceMock } from '@alfresco/adf-core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -12,6 +12,8 @@ import { DataService } from 'app/services/data.service';
 import { BehaviorSubject, of } from 'rxjs';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/internal/operators/filter';
+import { inject } from '@angular/core/src/di/injector';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 fdescribe('LoginComponent', () => {
   let component: LoginComponent;
@@ -43,7 +45,9 @@ fdescribe('LoginComponent', () => {
         ProcessModule.forRoot(),
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useClass: TranslateLoaderService }
-        })
+        }),
+        ReactiveFormsModule, 
+        FormsModule
       ],
       declarations: [LoginComponent],
       providers: [
@@ -55,6 +59,7 @@ fdescribe('LoginComponent', () => {
     });
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
+    component.ngOnInit();
     fixture.detectChanges();
   });
 
@@ -63,16 +68,8 @@ fdescribe('LoginComponent', () => {
     component.loginForm.controls['password'].setValue(userPassword);
   }
 
-  it('Component successfully created', () => {
-    expect(component).toBeTruthy();
-  });
-
-/*  it('should call subject.next', () => {
-    const value = 'abcd';
-    subjectMock
-      .pipe(filter(res => !!res))
-      .subscribe(res => expect(res).toEqual(value));
-     subjectMock.next(value);
-  });*/
+  it('form invalid when empty', () => {
+    expect(component.loginForm.valid).toBeFalsy();
+});
 
 });

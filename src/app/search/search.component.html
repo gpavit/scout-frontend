@@ -19,8 +19,8 @@
         <br />
         <div class="input-group">
           <input type="text" class="form-control" id="workid" name="workid" formControlName="workId"
-            placeholder="Enter a Work ID">
-          <button class="btn" type="button" (click)="onSearch()">
+            placeholder="Enter a Work ID" />
+          <button class="btn" type="button" (click)="onSearch()" data-toggle="modal" data-target="#messageModal">
             <i class="fa fa-search"></i>
           </button>
         </div>
@@ -30,3 +30,42 @@
     </div>
   </div>
 </div>
+<!--*ngIf="gErrMsg || wErrMsg || cField"-->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog"   aria-labelledby="messageModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong><a class="navbar-brand" href="#">S</a>
+          Scout</strong>
+      </div>
+      <div class="modal-body" *ngIf="gErrMsg">
+        <p id="center">General Message</p>
+        <ul>
+          <li>{{general_error}}</li>
+        </ul>
+        <ul *ngFor="let item of gErrMsg">
+          <li>{{item.displayname}} - {{item._value}}</li>
+        </ul>
+      </div>
+      <div class="modal-body" *ngIf="wErrMsg">
+        <p id="center">Warning Message</p>
+        <ul *ngFor="let data of wErrMsg">
+          <li>{{data.displayName}} - {{data.value}}</li>
+        </ul>
+      </div>
+      <div class="modal-body" *ngIf="cField">
+        <p id="p-heading">The following fields have been updated by the source system:</p>
+        <br />
+        <ul id="text-color" *ngFor="let data of cField">
+          <li id="no-list">{{data.displayName}}</li>
+        </ul>
+        <br />
+        <p id="text-color">More fields have changed - see highlighted fields on the form</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" id="button-color" data-dismiss="modal" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

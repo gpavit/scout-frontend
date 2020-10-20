@@ -78,7 +78,7 @@ export class BookComponent implements OnInit {
 
   /*istanbul ignore text*/
   private _filter(value: string): any[] {
-    const filterValue = value;
+    const filterValue = value.toLowerCase();
     return this.countryData.filter(option =>
       option.name.toLowerCase().includes(filterValue) ||
       option.synonym && JSON.stringify(option.synonym).toLowerCase().includes(filterValue) ||
@@ -137,7 +137,7 @@ export class BookComponent implements OnInit {
         this.code = this.demoForm.controls['countryCode'].setValue(this.countryData[i].iso_code)
       }
     }
-    console.log("DemoForm", this.demoForm.value);
+    console.log("DemoForm", this.demoForm.value); 
     const name = 'Save Record ' + (moment(new Date()).format('DD-MM-YYYY HH:mm'));
     const startFormValues = {
       docId: this.docId,

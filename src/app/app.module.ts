@@ -54,6 +54,8 @@ import { MenuComponent } from './menu/menu.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { BPMService } from './services/bpm.service';
+import { BookViewComponent } from './book-view/book-view.component';
+import { ForbiddenValidatorDirective } from './directives/forbidden-name.directive';
 
 
 registerLocaleData(localeFr);
@@ -104,7 +106,9 @@ registerLocaleData(localeSv);
         FileViewComponent,
         SearchComponent,
         BookComponent,
-        MenuComponent
+        MenuComponent,
+        BookViewComponent,
+        ForbiddenValidatorDirective
     ],
     providers: [
         PreviewService,
